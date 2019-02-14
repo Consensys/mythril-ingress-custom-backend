@@ -3,7 +3,7 @@ all: all-container
 BUILDTAGS=
 
 # Use the 0.0 tag for testing, it shouldn't clobber any release builds
-TAG=$(CIRCLE_TAG:-$(git describe --tags))
+TAG=$(git describe --tags))
 REGISTRY?=mythrilapiplatform
 GOOS?=linux
 GO111MODULE=on
