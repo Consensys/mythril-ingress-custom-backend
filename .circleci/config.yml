@@ -16,7 +16,8 @@ jobs:
             apk --update add curl \
               && mkdir -p /tmp/download \
               && curl -L $DOWNLOAD_URL | tar -xz -C /tmp/download \
-              && mv /tmp/download/docker/docker /bin/
+              && mv /tmp/download/docker/docker /bin/ \
+              && chmod a+x /bin/docker
 
             apk add git make
             make release
