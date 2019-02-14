@@ -1,0 +1,17 @@
+version: 2
+jobs:
+  publishImage:
+    docker:
+      - image: golang:1.11-alpine3.8
+    steps:
+      - checkout
+      - run:
+          command: |
+            apk update && apk upgrade && apk --no-cache add git make
+            make release
+
+workflows:
+  version: 2
+  test_and_deploy:
+    jobs:
+      - publishImage
