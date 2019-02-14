@@ -6,11 +6,12 @@ BUILDTAGS=
 TAG?=0.3
 REGISTRY?=mythrilapiplatform
 GOOS?=linux
+GO111MODULE=on
 DOCKER?=docker
 SED_I?=sed -i
 GOHOSTOS ?= $(shell go env GOHOSTOS)
 
-PKG=k8s.io/ingress-nginx/images/custom-error-pages
+PKG=github.com/ConseSys/mythril-ingress-custom-backend
 
 ifeq ($(GOHOSTOS),darwin)
   SED_I=sed -i ''
