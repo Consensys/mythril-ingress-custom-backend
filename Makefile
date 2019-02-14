@@ -7,7 +7,7 @@ TAG=$(git describe --tags)
 REGISTRY?=mythrilapiplatform
 GOOS?=linux
 GO111MODULE=on
-DOCKER?=docker
+DOCKER?=/bin/docker
 SED_I?=sed -i
 GOHOSTOS ?= $(shell go env GOHOSTOS)
 
