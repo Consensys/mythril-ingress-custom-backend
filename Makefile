@@ -3,7 +3,7 @@ all: all-container
 BUILDTAGS=
 
 # Use the 0.0 tag for testing, it shouldn't clobber any release builds
-TAG?=0.3
+TAG=$(CIRCLE_TAG:-$(git describe --tags))
 REGISTRY?=mythrilapiplatform
 GOOS?=linux
 GO111MODULE=on
@@ -27,7 +27,7 @@ ARCH ?= $(shell go env GOARCH)
 GOARCH = ${ARCH}
 DUMB_ARCH = ${ARCH}
 
-BASEIMAGE?=alpine:3.7
+BASEIMAGE?=alpine:3.8
 
 ALL_ARCH = amd64
 
@@ -89,6 +89,7 @@ endif
 
 push: .push-$(ARCH)
 .push-$(ARCH):
+	$(DOCKER) login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
 	$(DOCKER) push $(MULTI_ARCH_IMG):$(TAG)
 ifeq ($(ARCH), amd64)
 	$(DOCKER) push $(IMAGE):$(TAG)
