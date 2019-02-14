@@ -5,6 +5,8 @@ jobs:
       - image: golang:1.11-alpine3.8
     steps:
       - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
       - run:
           command: |
             apk update && apk upgrade && apk --no-cache add git make
