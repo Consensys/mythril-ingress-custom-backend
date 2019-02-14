@@ -9,17 +9,7 @@ jobs:
           docker_layer_caching: true
       - run:
           command: |
-            DOCKER_CLI_VERSION="18.09-ce"
-            DOWNLOAD_URL="https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKER_CLI_VERSION.tgz"
-
-            # install docker client
-            apk --update add curl \
-              && mkdir -p /tmp/download \
-              && curl -L $DOWNLOAD_URL | tar -xz -C /tmp/download \
-              && mv /tmp/download/docker/docker /bin/ \
-              && chmod a+x /bin/docker
-
-            apk add git make
+            apk add --update git make docker
             make release
 
 workflows:

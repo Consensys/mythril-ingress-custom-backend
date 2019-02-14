@@ -3,11 +3,11 @@ all: all-container
 BUILDTAGS=
 
 # Use the 0.0 tag for testing, it shouldn't clobber any release builds
-TAG=$(git describe --tags)
+TAG=$(shell git describe --tags)
 REGISTRY?=mythrilapiplatform
 GOOS?=linux
 GO111MODULE=on
-DOCKER?=/bin/docker
+DOCKER?=docker
 SED_I?=sed -i
 GOHOSTOS ?= $(shell go env GOHOSTOS)
 
@@ -90,10 +90,7 @@ endif
 push: .push-$(ARCH)
 .push-$(ARCH):
 	$(DOCKER) login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
-	$(DOCKER) push $(MULTI_ARCH_IMG):$(TAG)
-ifeq ($(ARCH), amd64)
 	$(DOCKER) push $(IMAGE):$(TAG)
-endif
 
 clean:
 	$(DOCKER) rmi -f $(MULTI_ARCH_IMG):$(TAG) || true
