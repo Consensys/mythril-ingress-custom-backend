@@ -80,7 +80,7 @@ func main() {
 func errorHandler(path string) func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now()
-		ext := "html"
+		ext := "json"
 
 		if os.Getenv("DEBUG") != "" {
 			w.Header().Set(FormatHeader, r.Header.Get(FormatHeader))
@@ -95,7 +95,7 @@ func errorHandler(path string) func(http.ResponseWriter, *http.Request) {
 
 		format := r.Header.Get(FormatHeader)
 		if format == "" {
-			format = "text/html"
+			format = "application/json"
 			log.Printf("format not specified. Using %v", format)
 		}
 
